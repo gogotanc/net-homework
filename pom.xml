@@ -1,12 +1,272 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.gogotanc.work</groupId>
     <artifactId>netease-homework-tanc</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+    <packaging>war</packaging>
+    <name>netease-homework-tanc Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <!-- spring version -->
+        <spring-version>4.2.2.RELEASE</spring-version>
+        <!-- junit-->
+        <junit.version>4.12</junit.version>
+
+        <!-- encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- database constants config -->
+        <opt.db.driver>com.mysql.jdbc.Driver</opt.db.driver>
+        <opt.db.url.local>jdbc:mysql://localhost:3306/net-work?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.local>
+        <opt.db.url.tx>jdbc:mysql://www.gogotanc.cn:3306/net-work?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.tx>
+        <opt.db.username>root</opt.db.username>
+        <opt.db.password>gogotanc</opt.db.password>
+
+        <!-- tomcat设置 -->
+        <deploy.url>http://localhost:8080/manager/text</deploy.url>
+        <deploy.server>tomcat7</deploy.server>
+        <deploy.username>tomcat</deploy.username>
+        <deploy.password>123</deploy.password>
+        <deploy.path>/</deploy.path>
+        <deploy.port>8081</deploy.port>
+    </properties>
+
+    <profiles>
+
+        <profile>
+            <id>mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <properties>
+                <db.driver>${opt.db.driver}</db.driver>
+                <db.url>${opt.db.url.tx}</db.url>
+                <db.username>${opt.db.username}</db.username>
+                <db.password>${opt.db.password}</db.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <properties>
+                <db.driver>${opt.db.driver}</db.driver>
+                <db.url>${opt.db.url.tx}</db.url>
+                <db.username>${opt.db.username}</db.username>
+                <db.password>${opt.db.password}</db.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>win</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <db.driver>${opt.db.driver}</db.driver>
+                <db.url>${opt.db.url.tx}</db.url>
+                <db.username>${opt.db.username}</db.username>
+                <db.password>${opt.db.password}</db.password>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <properties>
+                <db.driver>${opt.db.driver}</db.driver>
+                <db.url>${opt.db.url.tx}</db.url>
+                <db.username>${opt.db.username}</db.username>
+                <db.password>${opt.db.password}</db.password>
+            </properties>
+        </profile>
+
+    </profiles>
+
+    <dependencies>
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 日志 : slf4j + logback -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.13</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- 实现slf4j接口并整合 -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+        <!-- 数据库驱动和链接池 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.37</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- spring 整合mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <!-- servlet web 相关 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+
+        <!-- spring 依赖包 -->
+        <!-- 1.spring 核心依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- 2.dao 层依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- 3.spring web 相关 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- 4.spring test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!-- 打包 resources 下面所有的文件，这样在生成的 target/classes 文件夹下面才会有这些配置文件，同时 pom 里面的配置信息才会替换 properties 文件中的占位符 -->
+            <resource>
+                <directory>src/main/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <!-- 打包 java 下面的所有文件，包括xml、class文件，除了java文件-->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- 编译插件 很关键，默认是 1.5 版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- tomcat7 插件 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>${deploy.url}</url>
+                    <server>${deploy.server}</server>
+                    <username>${deploy.username}</username>
+                    <password>${deploy.password}</password>
+                    <contextReloadable>true</contextReloadable>
+                    <path>${deploy.path}</path>
+                    <port>${deploy.port}</port>
+                </configuration>
+            </plugin>
+        </plugins>
+        <finalName>netease-homework-tanc</finalName>
+    </build>
 </project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gogotanc.work.dao.GoodsDao">
+    
+    <insert id="insert" parameterType="Goods">
+        INSERT INTO goods_tbl (title, summary, price, picture, content, flag, register_time, modify_time)
+        VALUES (#{title}, #{summary}, #{price}, #{picture}, #{content}, #{flag}, #{registerTime}, #{modifyTime})
+    </insert>
+
+</mapper>
