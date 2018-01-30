@@ -1,6 +1,6 @@
 package cn.gogotanc.work.dao;
 
-import cn.gogotanc.work.entity.Goods;
+import cn.gogotanc.work.entity.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,30 +13,26 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
- * 商品 DAO 单元测试
+ * 购买记录 DAO 单元测试类
  *
  * @author tanc
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring-dao.xml"})
 @Transactional
-public class GoodsDaoTest {
+public class OrderDaoTest {
 
     @Autowired
-    private GoodsDao goodsDao;
+    private OrderDao orderDao;
 
     @Test
     public void insert() throws Exception {
-        Goods goods = new Goods();
-        goods.setTitle("我是标题");
-        goods.setSummary("我是摘要");
-        goods.setContent("我是正文");
-        goods.setPicture("我是个图片地址");
-        goods.setPrice(10000);
-        goods.setFlag(0);
-        goods.setRegisterTime(new Date());
-        goods.setModifyTime(new Date());
-        int result = goodsDao.insert(goods);
+        Order order = new Order();
+        order.setGoodsId(10000);
+        order.setCount(10);
+        order.setPrice(10000);
+        order.setCreateTime(new Date());
+        int result = orderDao.insert(order);
         assertEquals(1, result);
     }
 

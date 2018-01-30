@@ -13,6 +13,7 @@ public interface GoodsDao {
      * 插入一个新的商品
      *
      * @param goods 商品信息
+     * @return 影响的条数
      */
-    void insert(Goods goods);
+    int insert(Goods goods);
 }
