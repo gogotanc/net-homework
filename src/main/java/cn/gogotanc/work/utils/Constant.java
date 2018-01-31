@@ -11,8 +11,12 @@ public class Constant {
     /**
      * 用户身份标识
      */
-    public static final int IDENTITY_SELLER = 0;
-    public static final int IDENTITY_BUYER = 1;
+    public static final int IDENTITY_SELLER = 1;
+    public static final int IDENTITY_BUYER = 2;
 
-    public static final int RESULT_CODE_ERROR = -1;
+    /**
+     * 通用返回结果
+     */
+    public static final int RESULT_CODE_ERROR = 0;
+    public static final int RESULT_CODE_SUCCESS= 1;
 }

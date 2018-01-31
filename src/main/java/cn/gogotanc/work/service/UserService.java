@@ -12,10 +12,7 @@ public interface UserService {
      *
      * @param username 用户名
      * @param password 密码
-     * @return :
-     * -1: 用户名密码错误
-     * 0: 卖家
-     * 1: 买家
+     * @return see Constant
      */
     int login(String username, String password);
 }

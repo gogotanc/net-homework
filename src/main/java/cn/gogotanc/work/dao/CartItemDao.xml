@@ -9,4 +9,32 @@
         VALUES (#{goodsId}, #{count})
     </insert>
 
+    <delete id="delete" parameterType="int">
+        DELETE FROM cart_tbl WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="CartItem">
+        UPDATE cart_tbl
+        SET goods_id = #{goodsId}, count = #{count}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateCount">
+        UPDATE cart_tbl
+        SET count = #{count}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" resultType="CartItem">
+        SELECT * FROM cart_tbl WHERE id = #{id} LIMIT 1
+    </select>
+
+    <select id="findByGoodsId" resultType="CartItem">
+        SELECT * FROM cart_tbl WHERE goods_id = #{goodsId} LIMIT 1
+    </select>
+
+    <select id="find" resultType="CartItem">
+        SELECT * FROM cart_tbl
+    </select>
+
 </mapper>
