@@ -52,4 +52,9 @@ public interface CartService {
      * @return 返回值为列表
      */
     List<GoodsItem> getAllItem();
+
+    /**
+     * 清空购物车
+     */
+    void clear();
 }

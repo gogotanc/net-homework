@@ -54,6 +54,11 @@ public class CartServiceTest {
     }
 
     @Test
+    public void clear() throws Exception {
+        cartService.clear();
+    }
+
+    @Test
     public void getAll() throws Exception {
         List<CartItem> list = cartService.getAll();
         assertNotNull(list);

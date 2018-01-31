@@ -50,6 +50,22 @@ public interface GoodsService {
     int update(Goods goods);
 
     /**
+     * 更新一系列商品的购买状态
+     * @param ids 商品标识列表
+     * @param flag 要更新的状态
+     * @return !=0 success
+     */
+    int updateFlag(List<Integer> ids, Integer flag);
+
+    /**
+     * 更新一个商品的购买标识
+     * @param id 商品标识
+     * @param flag 要更新的状态
+     * @return !=0 success
+     */
+    int updateFlag(Integer id, Integer flag);
+
+    /**
      * 删除商品信息
      *
      * @param id 商品标识

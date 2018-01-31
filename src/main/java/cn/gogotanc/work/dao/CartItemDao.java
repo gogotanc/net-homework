@@ -29,6 +29,11 @@ public interface CartItemDao {
     int delete(@Param("id") Integer id);
 
     /**
+     * 删除所有记录
+     */
+    void deleteAll();
+
+    /**
      * 更新条目
      * @param item 条目信息
      * @return 1: success

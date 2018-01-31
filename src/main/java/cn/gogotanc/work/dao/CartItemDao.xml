@@ -13,6 +13,10 @@
         DELETE FROM cart_tbl WHERE id = #{id}
     </delete>
 
+    <delete id="deleteAll">
+        DELETE FROM cart_tbl
+    </delete>
+
     <update id="update" parameterType="CartItem">
         UPDATE cart_tbl
         SET goods_id = #{goodsId}, count = #{count}

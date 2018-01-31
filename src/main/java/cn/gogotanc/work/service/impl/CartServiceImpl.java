@@ -56,4 +56,9 @@ public class CartServiceImpl implements CartService {
     public List<GoodsItem> getAllItem() {
         return itemDao.findAllItem();
     }
+
+    @Override
+    public void clear() {
+        itemDao.deleteAll();
+    }
 }

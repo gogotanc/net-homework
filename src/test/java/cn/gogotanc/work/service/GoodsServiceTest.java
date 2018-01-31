@@ -1,11 +1,15 @@
 package cn.gogotanc.work.service;
 
+import cn.gogotanc.work.utils.Constant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -35,6 +39,14 @@ public class GoodsServiceTest {
 
     @Test
     public void update() throws Exception {
+    }
+
+    @Test
+    public void updateFlag() throws Exception {
+        List<Integer> list = new ArrayList<>(1);
+        list.add(10000);
+        int result = goodsService.updateFlag(list, Constant.GOODS_FLAG_SELLED);
+        assertEquals(Constant.RESULT_CODE_SUCCESS, result);
     }
 
     @Test

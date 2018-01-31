@@ -42,6 +42,11 @@ public class CartItemDaoTest {
     }
 
     @Test
+    public void deleteAll() throws Exception {
+        itemDao.deleteAll();
+    }
+
+    @Test
     public void update() throws Exception {
         CartItem item = new CartItem();
         item.setId(10000);

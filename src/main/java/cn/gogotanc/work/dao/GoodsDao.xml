@@ -9,4 +9,12 @@
         VALUES (#{title}, #{summary}, #{price}, #{picture}, #{content}, #{flag}, #{registerTime}, #{modifyTime})
     </insert>
 
+    <update id="updateFlag">
+        UPDATE goods_tbl SET flag = #{flag}
+        WHERE id IN
+        <foreach collection="list" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+
 </mapper>
