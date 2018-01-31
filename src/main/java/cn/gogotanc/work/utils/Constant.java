@@ -1,4 +1,4 @@
-package cn.gogotanc.work.constant;
+package cn.gogotanc.work.utils;
 
 public class Constant {
 

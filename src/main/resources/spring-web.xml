@@ -29,6 +29,6 @@
     <mvc:resources mapping="/favicon.ico" location="/favicon.ico"/>
 
     <!-- 包扫描 -->
-    <context:component-scan base-package="cn.gogotanc.work.controller"/>
+    <context:component-scan base-package="cn.gogotanc.work.web"/>
 
 </beans>
