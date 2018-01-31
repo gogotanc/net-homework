@@ -25,8 +25,8 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public List<Goods> getPurchasable() {
-        return goodsDao.findByFlag(Constant.GOODS_FLAG_UNSELLED);
+    public List<Goods> getUnsold() {
+        return goodsDao.findByFlag(Constant.GOODS_FLAG_UNSOLD);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public int delete(Integer id) {
         Goods goods = goodsDao.findById(id);
-        if (null == goods || goods.getFlag() == Constant.GOODS_FLAG_SELLED) {
+        if (null == goods || goods.getFlag() == Constant.GOODS_FLAG_SOLD) {
             return Constant.RESULT_CODE_ERROR;
         }
         goodsDao.delete(id);

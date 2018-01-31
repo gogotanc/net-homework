@@ -23,7 +23,7 @@ public interface GoodsService {
      *
      * @return 商品列表
      */
-    List<Goods> getPurchasable();
+    List<Goods> getUnsold();
 
     /**
      * 查询单个商品

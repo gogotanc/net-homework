@@ -1,6 +1,5 @@
 package cn.gogotanc.work.service;
 
-import cn.gogotanc.work.entity.Goods;
 import cn.gogotanc.work.utils.Constant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +25,7 @@ public class GoodsServiceTest {
     public void updateFlag() throws Exception {
         List<Integer> list = new ArrayList<>(1);
         list.add(10000);
-        int result = goodsService.updateFlag(list, Constant.GOODS_FLAG_SELLED);
+        int result = goodsService.updateFlag(list, Constant.GOODS_FLAG_SOLD);
         assertEquals(Constant.RESULT_CODE_SUCCESS, result);
     }
 

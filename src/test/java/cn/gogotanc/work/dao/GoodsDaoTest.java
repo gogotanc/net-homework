@@ -69,7 +69,7 @@ public class GoodsDaoTest {
     public void updateFlag() throws Exception {
         List<Integer> list = new ArrayList<>(1);
         list.add(10000);
-        int result = goodsDao.updateFlag(list, Constant.GOODS_FLAG_SELLED);
+        int result = goodsDao.updateFlag(list, Constant.GOODS_FLAG_SOLD);
         assertEquals(Constant.RESULT_CODE_SUCCESS, result);
     }
 
@@ -90,7 +90,7 @@ public class GoodsDaoTest {
 
     @Test
     public void findByFlag() throws Exception {
-        List<Goods> list = goodsDao.findByFlag(Constant.GOODS_FLAG_UNSELLED);
+        List<Goods> list = goodsDao.findByFlag(Constant.GOODS_FLAG_UNSOLD);
         assertNotNull(list);
         for (Goods goods : list) {
             System.out.println(goods);

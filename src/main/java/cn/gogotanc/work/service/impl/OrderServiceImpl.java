@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
         for (Order order : list) {
             ids.add(order.getGoodsId());
         }
-        goodsService.updateFlag(ids, Constant.GOODS_FLAG_SELLED);
+        goodsService.updateFlag(ids, Constant.GOODS_FLAG_SOLD);
 
         return Constant.RESULT_CODE_SUCCESS;
     }
