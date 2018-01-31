@@ -21,27 +21,27 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public List<Goods> getAll() {
-        return null;
+        return goodsDao.findAll();
     }
 
     @Override
-    public List<Goods> getUnpaied() {
-        return null;
+    public List<Goods> getPurchasable() {
+        return goodsDao.findByFlag(Constant.GOODS_FLAG_UNSELLED);
     }
 
     @Override
     public Goods find(Integer id) {
-        return null;
+        return goodsDao.findById(id);
     }
 
     @Override
     public int add(Goods goods) {
-        return 0;
+        return goodsDao.insert(goods);
     }
 
     @Override
     public int update(Goods goods) {
-        return 0;
+        return goodsDao.update(goods);
     }
 
     @Override
@@ -61,6 +61,11 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public int delete(Integer id) {
-        return 0;
+        Goods goods = goodsDao.findById(id);
+        if (null == goods || goods.getFlag() == Constant.GOODS_FLAG_SELLED) {
+            return Constant.RESULT_CODE_ERROR;
+        }
+        goodsDao.delete(id);
+        return Constant.RESULT_CODE_SUCCESS;
     }
 }

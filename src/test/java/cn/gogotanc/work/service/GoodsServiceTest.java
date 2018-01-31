@@ -1,5 +1,6 @@
 package cn.gogotanc.work.service;
 
+import cn.gogotanc.work.entity.Goods;
 import cn.gogotanc.work.utils.Constant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,26 +23,6 @@ public class GoodsServiceTest {
     private GoodsService goodsService;
 
     @Test
-    public void getAll() throws Exception {
-    }
-
-    @Test
-    public void getUnpaied() throws Exception {
-    }
-
-    @Test
-    public void find() throws Exception {
-    }
-
-    @Test
-    public void add() throws Exception {
-    }
-
-    @Test
-    public void update() throws Exception {
-    }
-
-    @Test
     public void updateFlag() throws Exception {
         List<Integer> list = new ArrayList<>(1);
         list.add(10000);
@@ -51,6 +32,8 @@ public class GoodsServiceTest {
 
     @Test
     public void delete() throws Exception {
+        int result = goodsService.delete(10000);
+        assertEquals(Constant.RESULT_CODE_SUCCESS, result);
     }
 
 }
