@@ -13,7 +13,7 @@ import java.util.List;
 public interface CartService {
 
     /**
-     * 将一个商品添加进购物车
+     * 将一个商品添加进购物车，如果已经存在购物车，则只加数量
      * @param item 商品信息
      * @return 影响的条数
      */

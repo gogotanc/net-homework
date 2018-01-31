@@ -4,6 +4,7 @@ import cn.gogotanc.work.dao.CartItemDao;
 import cn.gogotanc.work.entity.CartItem;
 import cn.gogotanc.work.entity.GoodsItem;
 import cn.gogotanc.work.service.CartService;
+import cn.gogotanc.work.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int addItem(CartItem item) {
+
+        CartItem another = itemDao.findByGoodsId(item.getGoodsId());
+
+        if (null != another) {
+            itemDao.updateCount(another.getId(), another.getCount() + 1);
+            return Constant.RESULT_CODE_SUCCESS;
+        }
+
         return itemDao.insert(item);
     }
 
