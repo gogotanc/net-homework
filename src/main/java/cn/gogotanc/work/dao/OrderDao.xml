@@ -9,4 +9,16 @@
         VALUES (#{goodsId}, #{price}, #{count}, #{createTime})
     </insert>
 
+    <insert id="insertList" parameterType="list">
+        INSERT INTO order_tbl (goods_id, price, count, create_time)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.goodsId}, #{item.price}, #{item.count}, #{item.createTime})
+        </foreach>
+    </insert>
+
+    <select id="find" resultType="Order">
+        SELECT * FROM order_tbl
+    </select>
+
 </mapper>

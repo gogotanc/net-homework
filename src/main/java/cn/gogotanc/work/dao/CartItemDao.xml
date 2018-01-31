@@ -37,4 +37,12 @@
         SELECT * FROM cart_tbl
     </select>
 
+    <select id="findAllItem" resultType="GoodsItem">
+        SELECT C.goods_id AS 'goodsId', C.id AS 'itemId', C.count AS 'count',
+        G.price AS 'price', G.title AS 'title'
+        FROM cart_tbl C
+        LEFT JOIN goods_tbl G
+        ON C.goods_id = G.id
+    </select>
+
 </mapper>

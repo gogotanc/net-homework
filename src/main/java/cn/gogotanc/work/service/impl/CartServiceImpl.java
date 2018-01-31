@@ -2,6 +2,7 @@ package cn.gogotanc.work.service.impl;
 
 import cn.gogotanc.work.dao.CartItemDao;
 import cn.gogotanc.work.entity.CartItem;
+import cn.gogotanc.work.entity.GoodsItem;
 import cn.gogotanc.work.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,10 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartItem> getAll() {
         return itemDao.find();
+    }
+
+    @Override
+    public List<GoodsItem> getAllItem() {
+        return itemDao.findAllItem();
     }
 }

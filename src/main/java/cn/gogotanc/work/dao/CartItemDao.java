@@ -1,6 +1,7 @@
 package cn.gogotanc.work.dao;
 
 import cn.gogotanc.work.entity.CartItem;
+import cn.gogotanc.work.entity.GoodsItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -61,4 +62,10 @@ public interface CartItemDao {
      * @return 条目列表
      */
     List<CartItem> find();
+
+    /**
+     * 获取所有条目，用于显示
+     * @return 条目列表
+     */
+    List<GoodsItem> findAllItem();
 }

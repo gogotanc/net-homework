@@ -1,5 +1,8 @@
 package cn.gogotanc.work.utils;
 
+/**
+ * @author tanc
+ */
 public class Constant {
 
     /**

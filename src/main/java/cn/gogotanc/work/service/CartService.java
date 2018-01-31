@@ -1,6 +1,7 @@
 package cn.gogotanc.work.service;
 
 import cn.gogotanc.work.entity.CartItem;
+import cn.gogotanc.work.entity.GoodsItem;
 
 import java.util.List;
 
@@ -45,4 +46,10 @@ public interface CartService {
      * @return 返回值为列表
      */
     List<CartItem> getAll();
+
+    /**
+     * 获取所有的购物车条目
+     * @return 返回值为列表
+     */
+    List<GoodsItem> getAllItem();
 }

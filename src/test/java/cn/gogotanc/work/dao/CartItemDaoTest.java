@@ -1,6 +1,7 @@
 package cn.gogotanc.work.dao;
 
 import cn.gogotanc.work.entity.CartItem;
+import cn.gogotanc.work.entity.GoodsItem;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,15 @@ public class CartItemDaoTest {
         List<CartItem> list = itemDao.find();
         assertNotNull(list);
         for (CartItem item : list) {
+            System.out.println(item);
+        }
+    }
+
+    @Test
+    public void findAllItem() throws Exception {
+        List<GoodsItem> list = itemDao.findAllItem();
+        assertNotNull(list);
+        for (GoodsItem item : list) {
             System.out.println(item);
         }
     }

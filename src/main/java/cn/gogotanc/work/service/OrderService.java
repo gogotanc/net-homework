@@ -12,6 +12,11 @@ import java.util.List;
 public interface OrderService {
 
     /**
+     * 下单：将购物车内容写进订单
+     */
+    int order();
+
+    /**
      * 添加购买记录
      *
      * @param order 购买记录
