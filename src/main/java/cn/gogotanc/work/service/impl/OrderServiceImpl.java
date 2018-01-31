@@ -1,7 +1,6 @@
 package cn.gogotanc.work.service.impl;
 
 import cn.gogotanc.work.dao.OrderDao;
-import cn.gogotanc.work.entity.CartItem;
 import cn.gogotanc.work.entity.GoodsItem;
 import cn.gogotanc.work.entity.Order;
 import cn.gogotanc.work.service.CartService;
