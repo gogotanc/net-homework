@@ -9,6 +9,17 @@
         VALUES (#{title}, #{summary}, #{price}, #{picture}, #{content}, #{flag}, #{registerTime}, #{modifyTime})
     </insert>
 
+    <delete id="delete" parameterType="int">
+        DELETE FROM goods_tbl WHERE id = #{id}
+    </delete>
+
+    <update id="update" parameterType="Goods">
+        UPDATE goods_tbl SET title = #{title}, content = #{content},
+        summary = #{summary}, price = #{price}, picture = #{picture},
+        flag = #{flag}, modify_time = #{modifyTime}
+        WHERE id = #{id}
+    </update>
+
     <update id="updateFlag">
         UPDATE goods_tbl SET flag = #{flag}
         WHERE id IN
@@ -17,4 +28,15 @@
         </foreach>
     </update>
 
+    <select id="findAll" resultType="Goods">
+        SELECT * FROM goods_tbl
+    </select>
+
+    <select id="findById" resultType="Goods">
+        SELECT * FROM goods_tbl WHERE id = #{id} LIMIT 1
+    </select>
+
+    <select id="findByFlag" resultType="Goods">
+        SELECT * FROM goods_tbl WHERE flag = #{flag}
+    </select>
 </mapper>

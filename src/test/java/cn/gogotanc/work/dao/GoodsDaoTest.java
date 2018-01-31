@@ -44,6 +44,28 @@ public class GoodsDaoTest {
     }
 
     @Test
+    public void delete() throws Exception {
+        int result = goodsDao.delete(10000);
+        assertEquals(Constant.RESULT_CODE_SUCCESS, result);
+    }
+
+    @Test
+    public void update() throws Exception {
+        Goods goods = new Goods();
+        goods.setId(10000);
+        goods.setTitle("title");
+        goods.setSummary("summary");
+        goods.setContent("content");
+        goods.setPicture("picture");
+        goods.setPrice(11111);
+        goods.setFlag(1);
+        goods.setRegisterTime(new Date());
+        goods.setModifyTime(new Date());
+        int result = goodsDao.update(goods);
+        assertEquals(Constant.RESULT_CODE_SUCCESS, result);
+    }
+
+    @Test
     public void updateFlag() throws Exception {
         List<Integer> list = new ArrayList<>(1);
         list.add(10000);
@@ -51,4 +73,27 @@ public class GoodsDaoTest {
         assertEquals(Constant.RESULT_CODE_SUCCESS, result);
     }
 
+    @Test
+    public void findAll() throws Exception {
+        List<Goods> list = goodsDao.findAll();
+        assertNotNull(list);
+        for (Goods goods : list) {
+            System.out.println(goods);
+        }
+    }
+
+    @Test
+    public void findById() throws Exception {
+        Goods goods = goodsDao.findById(10000);
+        assertNotNull(goods);
+    }
+
+    @Test
+    public void findByFlag() throws Exception {
+        List<Goods> list = goodsDao.findByFlag(Constant.GOODS_FLAG_UNSELLED);
+        assertNotNull(list);
+        for (Goods goods : list) {
+            System.out.println(goods);
+        }
+    }
 }
