@@ -13,6 +13,7 @@
 <body>
 
     <h3>${message} <span class="label label-default">New</span></h3>
+    <h3>${goods.title} <span class="label label-default">New</span></h3>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
