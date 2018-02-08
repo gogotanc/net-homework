@@ -22,9 +22,7 @@
 
         <!-- database constants config -->
         <opt.db.driver>com.mysql.jdbc.Driver</opt.db.driver>
-        <opt.db.url.local>jdbc:mysql://localhost:3306/net-work?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.local>
         <opt.db.url.docker>jdbc:mysql://neeet-mysql:3306/net-work?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.docker>
-        <opt.db.url.hj>jdbc:mysql://www.蝴蝶结.com:3306/net-work?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.hj>
         <opt.db.url.test>jdbc:mysql://www.蝴蝶结.com:3306/net-work-test?useUnicode=true&amp;characterEncoding=UTF8</opt.db.url.test>
         <opt.db.username>root</opt.db.username>
         <opt.db.password>gogotanc</opt.db.password>
@@ -41,7 +39,7 @@
     <profiles>
 
         <profile>
-            <id>mac</id>
+            <id>develop</id>
             <activation>
                 <os>
                     <family>mac</family>
@@ -50,16 +48,6 @@
             <properties>
                 <db.driver>${opt.db.driver}</db.driver>
                 <db.url>${opt.db.url.test}</db.url>
-                <db.username>${opt.db.username}</db.username>
-                <db.password>${opt.db.password}</db.password>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>release</id>
-            <properties>
-                <db.driver>${opt.db.driver}</db.driver>
-                <db.url>${opt.db.url.hj}</db.url>
                 <db.username>${opt.db.username}</db.username>
                 <db.password>${opt.db.password}</db.password>
             </properties>
