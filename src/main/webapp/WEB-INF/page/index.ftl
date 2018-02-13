@@ -25,16 +25,16 @@
 <#include "./nav.ftl">
 
 <div class="container">
-    <#if Session["user-session-identity"]??>
-        <div class="row">
-            <div class="col-md-offset-1 col-md-10">
-                <ul class="nav nav-tabs">
-                    <li role="presentation" <#if tag != 2>class="active"</#if>><a href="/">所有商品</a></li>
-                    <li role="presentation" <#if tag == 2>class="active"</#if>><a href="/?tag=2">未购买</a></li>
-                </ul>
-            </div>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <ul class="nav nav-tabs">
+                <li role="presentation" <#if tag != 2>class="active"</#if>><a href="/">所有商品</a></li>
+                <#if Session["user-session-identity"]?? &&  Session["user-session-identity"] == 2>
+                <li role="presentation" <#if tag == 2>class="active"</#if>><a href="/?tag=2">可购买商品</a></li>
+                </#if>
+            </ul>
         </div>
-    </#if>
+    </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <ul class="goods-list">
@@ -46,6 +46,19 @@
                             <p>${item.title}</p>
                             <p>￥ <strong style="color: red;">${item.price}</strong></p>
                             <input type="hidden" name="goodsId" value="${item.id?c}">
+                            <#if item.flag == 1>
+                                <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
+                                    <span class="label label-default">已购买</span>
+                                <#else>
+                                    <span class="label label-default">已卖出</span>
+                                </#if>
+                            <#else>
+                                <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
+                                    <span class="label label-success">可购买</span>
+                                <#else>
+                                    <span class="label label-success">未卖出</span>
+                                </#if>
+                            </#if>
                         </div>
                     </div>
                 </li>
@@ -60,28 +73,20 @@
 <script src="/js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
+<!-- 导航栏脚本 -->
+<script src="/js/nav.js"></script>
 <script>
-    // 用户退出登录
-    $('#logoutLink').click(function () {
-        $.ajax({
-            type: 'post',
-            url: '/api/logout',
-            dataType: 'json',
-            success: function (data) {
-                if (data.code === -1) {
-                    console.log(data.info);
-                } else {
-                    window.location.href = ("/");
-                }
-            }
-        });
-    });
     // 商品详情页面
     $('.goods-list-item').click(function () {
         var goodsId = $(this).find('input').val();
         console.log(goodsId);
         window.location.href = ("/detail?id=" + goodsId);
     });
+    // 标签显示
+    <#if Session["user-session-identity"]??>
+    <#else>
+    $('.label').hide();
+    </#if>
 </script>
 </body>
 </html>

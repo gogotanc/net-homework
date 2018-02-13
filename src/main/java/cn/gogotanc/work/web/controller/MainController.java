@@ -6,6 +6,7 @@ import cn.gogotanc.work.entity.Order;
 import cn.gogotanc.work.service.CartService;
 import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.service.OrderService;
+import cn.gogotanc.work.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +36,7 @@ public class MainController {
 
         List<Goods> goodsList;
 
-        if (null != tag && 2 == tag) {
+        if (null != tag && Constant.INDEX_TAG_UNSOLD == tag) {
             goodsList = goodsService.getUnsold();
         } else {
             goodsList = goodsService.getAll();

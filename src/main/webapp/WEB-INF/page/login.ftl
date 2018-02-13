@@ -32,6 +32,7 @@
                     <label for="inputName" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-10">
                         <input type="text" id="inputName" class="form-control">
+                        <p id="errorMessage"></p>
                     </div>
                 </div>
                 <div class="form-group">
@@ -57,6 +58,14 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/md5.min.js"></script>
 <script>
+    // 消除错误信息
+    $('#inputName').focus(function () {
+        $('#errorMessage').text("");
+    });
+    $('#inputPassword').focus(function () {
+        $('#errorMessage').text("");
+    });
+    // 提交登录
     $('#submitButton').click(function () {
         var username = $('#inputName').val();
         var pass = $('#inputPassword').val();
@@ -69,6 +78,7 @@
             success: function (data) {
                 if (data.code === -1) {
                     console.log(data.info);
+                    $('#errorMessage').text("用户名或者密码错误，请重试。");
                 } else {
                     window.location.href = ("/");
                 }

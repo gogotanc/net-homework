@@ -24,4 +24,7 @@ public class Constant {
      */
     public static final int RESULT_CODE_ERROR = 0;
     public static final int RESULT_CODE_SUCCESS= 1;
+
+    public static final int INDEX_TAG_ALL = 1;
+    public static final int INDEX_TAG_UNSOLD = 2;
 }
