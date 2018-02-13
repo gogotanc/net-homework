@@ -1,0 +1,19 @@
+ul.goods-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+li.goods-list-item {
+  margin: 30px 30px 0 0;
+  float: left;
+  width: 200px;
+  cursor:pointer;
+}
+
+img.goods-img {
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+}
