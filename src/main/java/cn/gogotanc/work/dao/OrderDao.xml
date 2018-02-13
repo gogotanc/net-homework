@@ -21,4 +21,8 @@
         SELECT * FROM order_tbl
     </select>
 
+    <select id="findByGoodsId" resultType="Order">
+        SELECT * FROM order_tbl WHERE goods_id = #{goodsId} LIMIT 1
+    </select>
+
 </mapper>

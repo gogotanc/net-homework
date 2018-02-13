@@ -45,22 +45,42 @@
                     <h3>￥ ${goods.price?c}</h3>
                 </div>
             </div>
-            <#if goods.flag == 0>
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-default">-</button>
-                    <strong>0</strong>
-                    <button class="btn btn-default">+</button>
-                    <button type="button" class="btn btn-success">加入购物车</button>
-                </div>
-            </div>
-            <#else>
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-success" disabled>已购买</button>
-                    <p>当时购买价格：￥1000.00</p>
-                </div>
-            </div>
+            <#if Session["user-session-identity"]??>
+                <#if Session["user-session-identity"] == 2>
+                    <#-- 买家的情况 -->
+                    <#if goods.flag == 0>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button class="btn btn-default">-</button>
+                                <strong>0</strong>
+                                <button class="btn btn-default">+</button>
+                                <button type="button" class="btn btn-success">加入购物车</button>
+                            </div>
+                        </div>
+                    <#else>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-success" disabled>已购买</button>
+                                <p>当时购买价格：￥ ${order.price?c}</p>
+                            </div>
+                        </div>
+                    </#if>
+                <#else>
+                    <#-- 卖家情况 -->
+                    <#if goods.flag == 0>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-success">修改</button>
+                            </div>
+                        </div>
+                    <#else>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-success" disabled>已卖出</button>
+                            </div>
+                        </div>
+                    </#if>
+                </#if>
             </#if>
         </div>
     </div>

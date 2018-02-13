@@ -50,6 +50,10 @@ public class MainController {
     @RequestMapping("/detail")
     public String detail(@RequestParam("id") Integer goodsId, Model model) {
         Goods goods = goodsService.find(goodsId);
+        if (goods.getFlag() == Constant.GOODS_FLAG_SOLD) {
+            Order order = orderService.findByGoodsId(goods.getId());
+            model.addAttribute("order", order);
+        }
         model.addAttribute("goods", goods);
         return "detail";
     }

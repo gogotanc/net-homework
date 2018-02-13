@@ -33,4 +33,11 @@ public interface OrderDao {
      * @param list 购买记录列表
      */
     void insertList(List<Order> list);
+
+    /**
+     * 通过商品标识查找
+     * @param goodsId 商品标识
+     * @return 订单信息
+     */
+    Order findByGoodsId(@Param("goodsId") Integer goodsId);
 }

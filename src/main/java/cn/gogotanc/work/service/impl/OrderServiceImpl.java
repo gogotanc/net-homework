@@ -55,6 +55,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order findByGoodsId(Integer goodsId) {
+        return orderDao.findByGoodsId(goodsId);
+    }
+
+    @Override
     public int add(Order order) {
         return orderDao.insert(order);
     }
