@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
         CartItem another = itemDao.findByGoodsId(item.getGoodsId());
 
         if (null != another) {
-            itemDao.updateCount(another.getId(), another.getCount() + 1);
+            itemDao.updateCount(another.getId(), another.getCount() + item.getCount());
             return Constant.RESULT_CODE_SUCCESS;
         }
 

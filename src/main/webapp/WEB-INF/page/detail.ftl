@@ -43,6 +43,7 @@
                     <h2>${goods.title}</h2>
                     <p>${goods.summary}</p>
                     <h3>￥ ${goods.realPrice?string["0.00"]}</h3>
+                    <input id="goodsId" type="hidden" value="${goods.id?c}">
                 </div>
             </div>
             <#if Session["user-session-identity"]??>
@@ -51,10 +52,10 @@
                     <#if goods.flag == 0>
                         <div class="row">
                             <div class="col-md-12">
-                                <button class="btn btn-default">-</button>
-                                <strong>0</strong>
-                                <button class="btn btn-default">+</button>
-                                <button type="button" class="btn btn-success">加入购物车</button>
+                                <button id="minusButton" class="btn btn-default myButton">-</button>
+                                <strong id="countShow">1</strong>
+                                <button id="plusButton" class="btn btn-default myButton">+</button>
+                                <button id="addCartButton" type="button" class="btn btn-success">加入购物车</button>
                             </div>
                         </div>
                     <#else>
@@ -99,5 +100,39 @@
 <script src="/js/bootstrap.min.js"></script>
 <!-- 导航栏脚本 -->
 <script src="/js/nav.js"></script>
+<script>
+    $('#minusButton').click(function () {
+        var show = $('#countShow');
+        var count = show.text();
+        if (count > 1)
+            count--;
+        show.text(count);
+    });
+    $('#plusButton').click(function () {
+        var show = $('#countShow');
+        var count = show.text();
+        count++;
+        show.text(count);
+    });
+    $('#addCartButton').click(function () {
+        var goodsId = $('#goodsId').val();
+        var count = $('#countShow').text();
+
+        $.ajax({
+            type: 'post',
+            url: '/api/cart',
+            dataType: 'json',
+            data: {goodsId: goodsId, count: count},
+            success: function (data) {
+                if (data.code === -1) {
+                    console.log(data.info);
+                } else {
+//                    window.location.href = ("/");
+                    console.log("添加成功")
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
