@@ -70,7 +70,7 @@ public class MainController {
         List<GoodsItem> list = cartService.getAllItem();
         int total = 0;
         for (GoodsItem item : list) {
-            total += item.getPrice();
+            total += item.getPrice() * item.getCount();
         }
         double doubleTotal = Converter.price2Double(total);
         model.addAttribute("cart", list);
@@ -83,7 +83,7 @@ public class MainController {
         List<FinanceItem> list = orderService.getAllItem();
         int total = 0;
         for (FinanceItem item : list) {
-            total += item.getPrice();
+            total += item.getPrice() * item.getCount();
         }
         double doubleTotal = Converter.price2Double(total);
         model.addAttribute("list", list);

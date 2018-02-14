@@ -2,6 +2,7 @@ package cn.gogotanc.work.web.controller;
 
 import cn.gogotanc.work.entity.CartItem;
 import cn.gogotanc.work.service.CartService;
+import cn.gogotanc.work.service.OrderService;
 import cn.gogotanc.work.service.UserService;
 import cn.gogotanc.work.utils.Constant;
 import cn.gogotanc.work.utils.JsonResult;
@@ -31,6 +32,9 @@ public class ApiController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -71,6 +75,39 @@ public class ApiController {
         item.setCount(count);
         item.setGoodsId(goodsId);
         cartService.addItem(item);
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
+
+    @RequestMapping(value = "/updateCount", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId,
+                                    @RequestParam("count") Integer count) {
+        cartService.updateCount(itemId, count);
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId) {
+        cartService.deleteItem(itemId);
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
+
+    @RequestMapping(value = "/clear", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> cartClear() {
+        cartService.clear();
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> order() {
+        orderService.order();
         JsonResult result = new JsonResult();
         return result.toMap();
     }
