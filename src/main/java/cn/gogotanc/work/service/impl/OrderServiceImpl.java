@@ -1,6 +1,7 @@
 package cn.gogotanc.work.service.impl;
 
 import cn.gogotanc.work.dao.OrderDao;
+import cn.gogotanc.work.entity.FinanceItem;
 import cn.gogotanc.work.entity.GoodsItem;
 import cn.gogotanc.work.entity.Order;
 import cn.gogotanc.work.service.CartService;
@@ -67,5 +68,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAll() {
         return orderDao.find();
+    }
+
+    @Override
+    public List<FinanceItem> getAllItem() {
+        return orderDao.findAllItem();
     }
 }

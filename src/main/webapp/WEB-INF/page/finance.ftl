@@ -41,7 +41,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="4">总计</th>
-                        <th>￥ 10000.00</th>
+                        <th>￥ ${total?string["0.##"]}</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -49,13 +49,13 @@
                     <tr>
                         <td>
                             <figure class="img-rounded">
-                                <img class="finance-img" src="${item.goodsId}">
+                                <img class="finance-img" src="${item.picture}">
                             </figure>
                         </td>
-                        <td>${item.price}</td>
+                        <td>${item.title}</td>
                         <td>${item.createTime?date}</td>
                         <td>${item.count}</td>
-                        <td>${item.price?c}</td>
+                        <td>￥ ${item.realPrice?string["0.##"]}</td>
                     </tr>
                     </#list>
                     </tbody>

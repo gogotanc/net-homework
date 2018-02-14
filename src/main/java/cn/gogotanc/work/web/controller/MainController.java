@@ -1,5 +1,6 @@
 package cn.gogotanc.work.web.controller;
 
+import cn.gogotanc.work.entity.FinanceItem;
 import cn.gogotanc.work.entity.Goods;
 import cn.gogotanc.work.entity.GoodsItem;
 import cn.gogotanc.work.entity.Order;
@@ -7,6 +8,7 @@ import cn.gogotanc.work.service.CartService;
 import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.service.OrderService;
 import cn.gogotanc.work.utils.Constant;
+import cn.gogotanc.work.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,8 +74,14 @@ public class MainController {
 
     @RequestMapping("/finance")
     public String finance(Model model) {
-        List<Order> list = orderService.getAll();
+        List<FinanceItem> list = orderService.getAllItem();
+        int total = 0;
+        for (FinanceItem item : list) {
+            total += item.getPrice();
+        }
+        double doubleTotal = Converter.price2Double(total);
         model.addAttribute("list", list);
+        model.addAttribute("total", doubleTotal);
         return "finance";
     }
 

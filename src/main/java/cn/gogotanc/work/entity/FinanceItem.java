@@ -3,32 +3,31 @@ package cn.gogotanc.work.entity;
 import java.util.Date;
 
 /**
- * 订单项目实体类
+ * 用于财务页面显示的 vo
  *
  * @author tanc
  */
-public class Order {
+public class FinanceItem {
 
-    private Integer id;
-    private Integer goodsId;
+    private String title;
     private Integer price;
     private Integer count;
     private Date createTime;
+    private String picture;
 
-    public Integer getId() {
-        return id;
+    /**
+     * 返回元为单位的价格
+     */
+    public Double getRealPrice() {
+        return this.price.doubleValue() / 100.0;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getTitle() {
+        return title;
     }
 
-    public Integer getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getPrice() {
@@ -55,18 +54,22 @@ public class Order {
         this.createTime = createTime;
     }
 
-    public Double getRealPrice() {
-        return this.price.doubleValue() / 100;
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", goodsId=" + goodsId +
+        return "FinanceItem{" +
+                "title='" + title + '\'' +
                 ", price=" + price +
                 ", count=" + count +
                 ", createTime=" + createTime +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 }

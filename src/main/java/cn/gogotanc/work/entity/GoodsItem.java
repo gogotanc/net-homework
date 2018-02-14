@@ -2,6 +2,7 @@ package cn.gogotanc.work.entity;
 
 /**
  * 用于前端显示的商品条目
+ *
  * @author tanc
  */
 public class GoodsItem {

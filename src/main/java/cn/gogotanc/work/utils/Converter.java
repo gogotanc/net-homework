@@ -34,4 +34,14 @@ public class Converter {
         }
         return list;
     }
+
+    /**
+     * 将分为单位的价格转换成元为单位
+     *
+     * @param price 分为单位的价格
+     * @return 元为单位的价格
+     */
+    public static Double price2Double(Integer price) {
+        return price.doubleValue() / 100.0;
+    }
 }

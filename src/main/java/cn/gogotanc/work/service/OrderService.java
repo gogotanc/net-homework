@@ -1,5 +1,6 @@
 package cn.gogotanc.work.service;
 
+import cn.gogotanc.work.entity.FinanceItem;
 import cn.gogotanc.work.entity.Order;
 
 import java.util.List;
@@ -39,4 +40,11 @@ public interface OrderService {
      * @return 购买记录列表
      */
     List<Order> getAll();
+
+    /**
+     * 查询所有购买记录
+     *
+     * @return 返回用于前端显示
+     */
+    List<FinanceItem> getAllItem();
 }
