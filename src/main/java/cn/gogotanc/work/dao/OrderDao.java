@@ -49,4 +49,12 @@ public interface OrderDao {
      * @return 所有记录
      */
     List<FinanceItem> findAllItem();
+
+    /**
+     * 商品标识查找
+     *
+     * @param goodsId 商品标识
+     * @return 前端显示数据
+     */
+    FinanceItem findItemByGoodsId(@Param("goodsId") Integer goodsId);
 }

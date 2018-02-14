@@ -13,6 +13,10 @@ public class GoodsItem {
     private Integer price;
     private Integer count;
 
+    public Double getRealPrice() {
+        return this.price.doubleValue() / 100.0;
+    }
+
     public Integer getGoodsId() {
         return goodsId;
     }

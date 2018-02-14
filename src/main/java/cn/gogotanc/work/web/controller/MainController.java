@@ -53,8 +53,8 @@ public class MainController {
     public String detail(@RequestParam("id") Integer goodsId, Model model) {
         Goods goods = goodsService.find(goodsId);
         if (goods.getFlag() == Constant.GOODS_FLAG_SOLD) {
-            Order order = orderService.findByGoodsId(goods.getId());
-            model.addAttribute("order", order);
+            FinanceItem item = orderService.findItemByGoodsId(goods.getId());
+            model.addAttribute("order", item);
         }
         model.addAttribute("goods", goods);
         return "detail";
@@ -68,7 +68,13 @@ public class MainController {
     @RequestMapping("/cart")
     public String cart(Model model) {
         List<GoodsItem> list = cartService.getAllItem();
+        int total = 0;
+        for (GoodsItem item : list) {
+            total += item.getPrice();
+        }
+        double doubleTotal = Converter.price2Double(total);
         model.addAttribute("cart", list);
+        model.addAttribute("total", doubleTotal);
         return "cart";
     }
 

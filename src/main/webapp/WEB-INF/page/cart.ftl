@@ -39,7 +39,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="2">总计</th>
-                        <th colspan="2">￥ 10000.00</th>
+                        <th colspan="2">￥ ${total?string["0.00"]}</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -49,7 +49,7 @@
                         <td>
                             <span>-</span> ${item.count?c} <span>+</span>
                         </td>
-                        <td>${item.price?c}</td>
+                        <td>${item.realPrice?string["0.00"]}</td>
                         <td>
                             <a class="button is-text">删除</a>
                             <input type="hidden" value="${item.itemId?c}">

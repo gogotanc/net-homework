@@ -14,6 +14,7 @@ public interface OrderService {
 
     /**
      * 下单：将购物车内容写进订单
+     *
      * @return 1: success
      */
     int order();
@@ -47,4 +48,12 @@ public interface OrderService {
      * @return 返回用于前端显示
      */
     List<FinanceItem> getAllItem();
+
+    /**
+     * 通过商品标识查找
+     *
+     * @param goodsId 商品标识
+     * @return 前端显示数据
+     */
+    FinanceItem findItemByGoodsId(Integer goodsId);
 }

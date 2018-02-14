@@ -91,6 +91,10 @@ public class Goods {
         this.modifyTime = modifyTime;
     }
 
+    public Double getRealPrice() {
+        return this.price.doubleValue() / 100.0;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +

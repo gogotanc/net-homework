@@ -42,7 +42,7 @@
                 <div class="col-md-12">
                     <h2>${goods.title}</h2>
                     <p>${goods.summary}</p>
-                    <h3>￥ ${goods.price?c}</h3>
+                    <h3>￥ ${goods.realPrice?string["0.00"]}</h3>
                 </div>
             </div>
             <#if Session["user-session-identity"]??>
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-success" disabled>已购买</button>
-                                <p>当时购买价格：￥ ${order.price?c}</p>
+                                <p>当时购买价格：￥ ${order.realPrice?c}</p>
                             </div>
                         </div>
                     </#if>

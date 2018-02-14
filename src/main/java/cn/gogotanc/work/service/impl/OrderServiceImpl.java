@@ -74,4 +74,9 @@ public class OrderServiceImpl implements OrderService {
     public List<FinanceItem> getAllItem() {
         return orderDao.findAllItem();
     }
+
+    @Override
+    public FinanceItem findItemByGoodsId(Integer goodsId) {
+        return orderDao.findItemByGoodsId(goodsId);
+    }
 }

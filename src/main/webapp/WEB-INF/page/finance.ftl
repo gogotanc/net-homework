@@ -41,7 +41,7 @@
                     <tfoot>
                     <tr>
                         <th colspan="4">总计</th>
-                        <th>￥ ${total?string["0.##"]}</th>
+                        <th>￥ ${total?string["0.00"]}</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -55,7 +55,7 @@
                         <td>${item.title}</td>
                         <td>${item.createTime?date}</td>
                         <td>${item.count}</td>
-                        <td>￥ ${item.realPrice?string["0.##"]}</td>
+                        <td>￥ ${item.realPrice?string["0.00"]}</td>
                     </tr>
                     </#list>
                     </tbody>
