@@ -17,3 +17,7 @@ img.goods-img {
   width: 200px;
   height: 200px;
 }
+
+span.goods-label {
+  visibility: hidden;
+}

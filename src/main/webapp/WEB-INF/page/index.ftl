@@ -44,19 +44,19 @@
                         <img class="goods-img" src="${item.picture}" alt="...">
                         <div class="caption">
                             <p>${item.title}</p>
-                            <p>￥ <strong style="color: red;">${item.price}</strong></p>
+                            <p>￥ <strong style="color: red;">${item.realPrice?string("0.00")}</strong></p>
                             <input type="hidden" name="goodsId" value="${item.id?c}">
                             <#if item.flag == 1>
                                 <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
-                                    <span class="label label-default">已购买</span>
+                                    <span class="label label-default goods-label">已购买</span>
                                 <#else>
-                                    <span class="label label-default">已卖出</span>
+                                    <span class="label label-default goods-label">已卖出</span>
                                 </#if>
                             <#else>
                                 <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
-                                    <span class="label label-success">可购买</span>
+                                    <span class="label label-success goods-label">可购买</span>
                                 <#else>
-                                    <span class="label label-success">未卖出</span>
+                                    <span class="label label-success goods-label">未卖出</span>
                                 </#if>
                             </#if>
                         </div>
@@ -82,10 +82,9 @@
         console.log(goodsId);
         window.location.href = ("/detail?id=" + goodsId);
     });
-    // 标签显示
     <#if Session["user-session-identity"]??>
-    <#else>
-    $('.label').hide();
+    // 标签显示
+    $('.label').removeClass('goods-label');
     </#if>
 </script>
 </body>
