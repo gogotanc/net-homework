@@ -100,6 +100,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="addSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                添加成功。
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="toCartButton" class="btn btn-success" data-dismiss="modal">去购物车看看</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
 <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
 <#-- 买家登录时加载的脚本 -->
 <script>
@@ -129,11 +151,13 @@
                 if (data.code === -1) {
                     console.log(data.info);
                 } else {
-//                    window.location.href = ("/");
-                    console.log("添加成功")
+                    $('#addSuccess').modal('toggle');
                 }
             }
         });
+    });
+    $('#toCartButton').click(function () {
+        window.location.href = ("/cart");
     });
 </script>
 </#if>

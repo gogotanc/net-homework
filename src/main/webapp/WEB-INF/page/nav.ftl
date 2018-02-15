@@ -19,7 +19,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/add">发布</a></li>
                 </ul>
-                <p class="navbar-text navbar-right">欢迎你，<a id="logoutLink" href="#" class="navbar-link">卖家</a></p>
+                <p class="navbar-text navbar-right">欢迎你，卖家。<a id="logoutLink" href="#" class="navbar-link">[退出]</a></p>
             </div><!-- /.navbar-collapse -->
         <#-- 买家登录 -->
         <#elseif Session["user-session-identity"] == 2>
@@ -28,7 +28,7 @@
                     <li><a href="/finance">财务</a></li>
                     <li><a href="/cart">购物车</a></li>
                 </ul>
-                <p class="navbar-text navbar-right">欢迎你，<a id="logoutLink" href="#" class="navbar-link">买家</a></p>
+                <p class="navbar-text navbar-right">欢迎你，买家。<a id="logoutLink" href="#" class="navbar-link">[退出]</a></p>
             </div><!-- /.navbar-collapse -->
         </#if>
     <#else>
