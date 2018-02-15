@@ -13,6 +13,10 @@
         DELETE FROM cart_tbl WHERE id = #{id}
     </delete>
 
+    <delete id="deleteByGoodsId">
+        DELETE FROM cart_tbl WHERE goods_id = #{goodsId}
+    </delete>
+
     <delete id="deleteAll">
         DELETE FROM cart_tbl
     </delete>

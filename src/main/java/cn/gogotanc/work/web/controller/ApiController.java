@@ -2,6 +2,7 @@ package cn.gogotanc.work.web.controller;
 
 import cn.gogotanc.work.entity.CartItem;
 import cn.gogotanc.work.service.CartService;
+import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.service.OrderService;
 import cn.gogotanc.work.service.UserService;
 import cn.gogotanc.work.utils.Constant;
@@ -35,6 +36,9 @@ public class ApiController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -108,6 +112,14 @@ public class ApiController {
     @ResponseBody
     public Map<String, Object> order() {
         orderService.order();
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
+
+    @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> deleteGoods(@RequestParam("id") Integer goodsId) {
+        goodsService.delete(goodsId);
         JsonResult result = new JsonResult();
         return result.toMap();
     }

@@ -42,6 +42,13 @@ public interface CartService {
     int deleteItem(Integer id);
 
     /**
+     * 通过商品标识删除一个条目
+     * @param goodsId 商品的标识
+     * @return 1: success
+     */
+    int deleteItemByGoodsId(Integer goodsId);
+
+    /**
      * 获取所有的购物车条目
      * @return 返回值为列表
      */

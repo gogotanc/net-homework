@@ -29,6 +29,13 @@ public interface CartItemDao {
     int delete(@Param("id") Integer id);
 
     /**
+     * 通过商品标识删除条目
+     * @param goodsId 商品标识
+     * @return 1: success
+     */
+    int deleteByGoodsId(@Param("goodsId") Integer goodsId);
+
+    /**
      * 删除所有记录
      */
     void deleteAll();
@@ -73,4 +80,5 @@ public interface CartItemDao {
      * @return 条目列表
      */
     List<GoodsItem> findAllItem();
+
 }

@@ -78,13 +78,14 @@
                     <#if goods.flag == 0>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-success">修改</button>
+                                <button type="button" id="modifyButton" class="btn btn-success">修改</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteGoods">删除</button>
                             </div>
                         </div>
                     <#else>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-success" disabled>已卖出</button>
+                                <button type="button" class="btn btn-de" disabled>已卖出</button>
                             </div>
                         </div>
                     </#if>
@@ -100,6 +101,7 @@
     </div>
 </div>
 
+<!-- 添加购物车成功后弹出的 modal -->
 <div class="modal fade" id="addSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -122,9 +124,58 @@
     </div><!-- /.modal -->
 </div>
 
+<!-- 确认删除商品弹出的 modal -->
+<div class="modal fade" id="deleteGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                确定要删除该商品吗？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="deleteButton" class="btn btn-danger" data-dismiss="modal">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 删除商品成功后弹出的 modal -->
+<div class="modal fade" id="deleteSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    提示
+                </h4>
+            </div>
+            <div class="modal-body">
+                删除成功。
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="backIndex" class="btn btn-danger" data-dismiss="modal">返回首页</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script>
+$(document).ready(function () {
+    var data = {};
+    data.goodsId = ${goods.id?c};
+
 <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
 <#-- 买家登录时加载的脚本 -->
-<script>
     $('#minusButton').click(function () {
         var show = $('#countShow');
         var count = show.text();
@@ -159,7 +210,41 @@
     $('#toCartButton').click(function () {
         window.location.href = ("/cart");
     });
-</script>
 </#if>
+
+<#if Session["user-session-identity"]?? && Session["user-session-identity"] == 1>
+<#-- 卖家登录时加载的脚本 -->
+    $('#modifyButton').click(function () {
+        var goodsId = data.goodsId;
+        window.location.href = ("/updateGoods?id=" + goodsId);
+    });
+
+    $('#deleteButton').click(function () {
+        var goodsId = data.goodsId;
+        $.ajax({
+            type: 'post',
+            url: '/api/deleteGoods',
+            dataType: 'json',
+            data: {id: goodsId},
+            success: function (data) {
+                if (data.code === -1) {
+                    console.log(data.info);
+                } else {
+                    $('#deleteSuccess').modal("toggle");
+                }
+            }
+        });
+    });
+
+//    $('#backIndex').click(function () {
+//        window.location.href = ("/");
+//    });
+
+    $('#deleteSuccess').on('hidden.bs.modal', function () {
+        window.location.href = ("/");
+    });
+</#if>
+});
+</script>
 </body>
 </html>

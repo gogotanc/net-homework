@@ -2,6 +2,7 @@ package cn.gogotanc.work.service.impl;
 
 import cn.gogotanc.work.dao.GoodsDao;
 import cn.gogotanc.work.entity.Goods;
+import cn.gogotanc.work.service.CartService;
 import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private GoodsDao goodsDao;
+
+    @Autowired
+    private CartService cartService;
 
     @Override
     public List<Goods> getAll() {
@@ -66,6 +70,7 @@ public class GoodsServiceImpl implements GoodsService {
             return Constant.RESULT_CODE_ERROR;
         }
         goodsDao.delete(id);
+        cartService.deleteItemByGoodsId(id);
         return Constant.RESULT_CODE_SUCCESS;
     }
 }
