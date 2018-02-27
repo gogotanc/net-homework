@@ -236,10 +236,6 @@ $(document).ready(function () {
         });
     });
 
-//    $('#backIndex').click(function () {
-//        window.location.href = ("/");
-//    });
-
     $('#deleteSuccess').on('hidden.bs.modal', function () {
         window.location.href = ("/");
     });
