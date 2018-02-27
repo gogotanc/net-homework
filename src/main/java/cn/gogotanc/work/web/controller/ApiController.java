@@ -123,4 +123,14 @@ public class ApiController {
         JsonResult result = new JsonResult();
         return result.toMap();
     }
+
+    /**
+     * 添加商品
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> addGoods() {
+        JsonResult result = new JsonResult();
+        return result.toMap();
+    }
 }

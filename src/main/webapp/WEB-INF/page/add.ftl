@@ -35,7 +35,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">添加商品</div>
                 <div class="panel-form">
-                    <form id="goodsAddForm" action="/api/add" class="form-horizontal form-login">
+                    <form id="goodsAddForm" class="form-horizontal form-login">
                         <div class="form-group">
                             <label for="goodsName" class="col-sm-2 control-label">商品名称</label>
                             <div class="col-sm-10">
@@ -138,9 +138,28 @@ $(document).ready(function () {
 
     $('#publishButton').click(function () {
         if (validateFunc().form()) {
-            console.log('ok');
-        } else {
-            console.log("no");
+            var data = new FormData(document.getElementById("goodsAddForm"));
+//            console.log("name", data.get("goodsName"));
+//            console.log("type", data.get("goodsPictureType"));
+//            console.log("file", data.get("goodsPictureFile"));
+//            console.log("link", data.get("goodsPictureLink"));
+            $.ajax({
+                url: "/api/add",
+                type: "post",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.code === -1) {
+                        console.log(data.info);
+                    } else {
+                        console.log("ok");
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
         }
     });
 
@@ -169,13 +188,11 @@ $(document).ready(function () {
                 },
                 goodsPictureLink: {
                     required: function () {
-                        console.log("link", checkedVal);
                         return checkedVal === '1';
                     }
                 },
                 goodsPictureFile: {
                     required: function () {
-                        console.log("file", checkedVal);
                         return checkedVal === '2';
                     }
                 }
