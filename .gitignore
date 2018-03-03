@@ -16,3 +16,5 @@ hs_err_pid*
 netease-homework-tanc.iml
 target/
 
+# tmp
+src/main/webapp/upload/
