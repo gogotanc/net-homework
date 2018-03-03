@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.gogotanc.work.dao.GoodsDao">
     
-    <insert id="insert" parameterType="Goods">
+    <insert id="insert" parameterType="Goods" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO goods_tbl (title, summary, price, picture, content, flag, register_time, modify_time)
         VALUES (#{title}, #{summary}, #{price}, #{picture}, #{content}, #{flag}, #{registerTime}, #{modifyTime})
     </insert>

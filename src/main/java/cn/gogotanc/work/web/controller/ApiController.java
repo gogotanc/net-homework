@@ -197,7 +197,7 @@ public class ApiController {
         // add goods to database
         goodsService.add(goods);
 
-        result.setStatusOK();
+        result.setStatusOK(goods.getId() + "");
         return result.toMap();
     }
 
