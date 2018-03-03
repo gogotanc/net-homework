@@ -1,22 +1,31 @@
 package cn.gogotanc.work.web.controller;
 
 import cn.gogotanc.work.entity.CartItem;
+import cn.gogotanc.work.entity.Goods;
 import cn.gogotanc.work.service.CartService;
 import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.service.OrderService;
 import cn.gogotanc.work.service.UserService;
 import cn.gogotanc.work.utils.Constant;
+import cn.gogotanc.work.utils.Encoder;
 import cn.gogotanc.work.utils.JsonResult;
+import cn.gogotanc.work.web.vo.GoodsForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -129,8 +138,82 @@ public class ApiController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> addGoods() {
+    public Map<String, Object> addGoods(@Valid GoodsForm form, BindingResult bindingResult,
+                                        @RequestParam("goodsPictureFile") MultipartFile file,
+                                        @RequestParam("goodsPictureType") Integer pictureType,
+                                        @RequestParam("goodsPictureLink") String link,
+                                        HttpServletRequest request) {
+
+        System.out.println(form);
+
         JsonResult result = new JsonResult();
+        if (bindingResult.hasErrors()) {
+            result.setStatusFail(bindingResult.getAllErrors().get(0).getDefaultMessage());
+            return result.toMap();
+        }
+
+        if (null == pictureType) {
+            result.setStatusFail("图片类型不能为空");
+            return result.toMap();
+        } else if (pictureType == 1 && null == link) {
+            result.setStatusFail("图片链接不能为空");
+            return result.toMap();
+        } else if (pictureType == 2 && null == file) {
+            result.setStatusFail("图片文件不能为空");
+            return result.toMap();
+        }
+
+        Goods goods = createNewGoods(form, link);
+
+        // 如果是选择上传了图片文件
+        if (pictureType.equals(Constant.PICTURE_TYPE_FILE)) {
+
+            // /Users/tanc/project/neeet/src/main/webapp/
+            String path = request.getServletContext().getRealPath("/") + "upload" + File.separator;
+
+            File dir = new File(path);
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    result.setStatusFail();
+                    return result.toMap();
+                }
+            }
+            // 写文件到服务器
+            String fileOriginName = file.getOriginalFilename();
+            String suffix = fileOriginName.substring(fileOriginName.lastIndexOf("."), fileOriginName.length());
+            String fileName = Constant.UPLOAD_FILE_PREFIX + Encoder.getUUID() + suffix;
+            File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+            try {
+                file.transferTo(serverFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.setStatusFail();
+                return result.toMap();
+            }
+
+            goods.setPicture(fileName);
+        }
+
+        // add goods to database
+        goodsService.add(goods);
+
+        result.setStatusOK();
         return result.toMap();
+    }
+
+    /**
+     * 生成一个 Goods 对象
+     */
+    private Goods createNewGoods(GoodsForm form, String picture) {
+        Goods goods = new Goods();
+        goods.setFlag(0);
+        goods.setModifyTime(new Date());
+        goods.setRegisterTime(new Date());
+        goods.setPrice(form.getGoodsPrice());
+        goods.setSummary(form.getGoodsSummary());
+        goods.setContent(form.getGoodsDetail());
+        goods.setTitle(form.getGoodsName());
+        goods.setPicture(picture);
+        return goods;
     }
 }

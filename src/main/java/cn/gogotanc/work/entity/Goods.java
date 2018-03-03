@@ -1,5 +1,7 @@
 package cn.gogotanc.work.entity;
 
+import cn.gogotanc.work.utils.Constant;
+
 import java.util.Date;
 
 /**
@@ -52,6 +54,9 @@ public class Goods {
     }
 
     public String getPicture() {
+        if (picture.startsWith(Constant.UPLOAD_FILE_PREFIX)) {
+            return "/upload/" + picture;
+        }
         return picture;
     }
 

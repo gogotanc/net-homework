@@ -27,4 +27,11 @@ public class Constant {
 
     public static final int INDEX_TAG_ALL = 1;
     public static final int INDEX_TAG_UNSOLD = 2;
+
+    /**
+     * 存放上传文件的前缀
+     */
+    public static final String UPLOAD_FILE_PREFIX = "UFT-";
+    public static final Integer PICTURE_TYPE_LINK = 1;
+    public static final Integer PICTURE_TYPE_FILE = 2;
 }

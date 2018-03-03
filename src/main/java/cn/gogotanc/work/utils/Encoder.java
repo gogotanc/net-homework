@@ -1,6 +1,7 @@
 package cn.gogotanc.work.utils;
 
 import java.security.MessageDigest;
+import java.util.UUID;
 
 /**
  * @author tanc
@@ -51,4 +52,15 @@ public class Encoder {
         }
         return new String(result);
     }
+
+    /**
+     * 生成一个 UUID，没有 "-" 的形式
+     */
+    public static String getUUID() {
+        UUID uuid = UUID.randomUUID();
+        String str = uuid.toString();
+        // 返回去掉 "-" 符号的结果
+        return str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
+    }
+
 }
