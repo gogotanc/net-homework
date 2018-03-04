@@ -46,16 +46,14 @@
                             <p>${item.title}</p>
                             <p>￥ <strong style="color: red;">${item.realPrice?string("0.00")}</strong></p>
                             <input type="hidden" name="goodsId" value="${item.id?c}">
-                            <#if item.flag == 1>
-                                <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
+                            <#if Session["user-session-identity"]??>
+                                <#if Session["user-session-identity"] == 2 && item.flag == 1>
                                     <span class="label label-default goods-label">已购买</span>
-                                <#else>
-                                    <span class="label label-default goods-label">已卖出</span>
-                                </#if>
-                            <#else>
-                                <#if Session["user-session-identity"]?? && Session["user-session-identity"] == 2>
+                                <#elseif Session["user-session-identity"] == 2 && item.flag == 0>
                                     <span class="label label-success goods-label">可购买</span>
-                                <#else>
+                                <#elseif Session["user-session-identity"] == 1 && item.flag == 1>
+                                    <span class="label label-default goods-label">已卖出</span>
+                                <#elseif Session["user-session-identity"] == 1 && item.flag == 0>
                                     <span class="label label-success goods-label">未卖出</span>
                                 </#if>
                             </#if>
@@ -67,7 +65,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/jquery.min.js"></script>
