@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 用户登录拦截器
+ *
  * @author tanc
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -14,7 +16,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        String identity = (String) request.getSession().getAttribute(Constant.USER_SESSION_IDENTITY);
+        Object identity = request.getSession().getAttribute(Constant.USER_SESSION_IDENTITY);
 
         if (null != identity) {
             return true;

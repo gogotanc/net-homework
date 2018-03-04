@@ -29,10 +29,12 @@ import java.util.Date;
 import java.util.Map;
 
 /**
+ * API 请求处理
+ *
  * @author tanc
  */
 @Controller
-@RequestMapping("/api")
+@RequestMapping(UrlDefine.API.ROOT)
 public class ApiController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -52,7 +54,7 @@ public class ApiController {
     /**
      * 用户登录请求处理
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.LOGIN, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> login(@RequestParam("username") String username,
                                      @RequestParam("password") String password,
@@ -77,7 +79,7 @@ public class ApiController {
     /**
      * 用户退出请求处理
      */
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.LOGOUT, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> logout(HttpServletRequest request) {
 
@@ -91,7 +93,7 @@ public class ApiController {
     /**
      * 处理买家添加商品到购物车的请求
      */
-    @RequestMapping(value = "/cart", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.CART, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cart(@RequestParam("goodsId") Integer goodsId,
                                     @RequestParam("count") Integer count) {
@@ -109,10 +111,10 @@ public class ApiController {
     /**
      * 用户更新购物车中商品的数量的请求
      */
-    @RequestMapping(value = "/updateCount", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.UPDATE_CART_ITEM_COUNT, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId,
-                                    @RequestParam("count") Integer count) {
+                                               @RequestParam("count") Integer count) {
         logger.debug("更新购物车中某个商品的数量，购物车标识 ID : {}, 数量 : {}", itemId, count);
         cartService.updateCount(itemId, count);
         JsonResult result = new JsonResult();
@@ -122,7 +124,7 @@ public class ApiController {
     /**
      * 删除购物车中商品
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.DELETE_CART_ITEM, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId) {
         logger.debug("删除购物车中商品，购物车标识 ID : {}", itemId);
@@ -134,7 +136,7 @@ public class ApiController {
     /**
      * 清空购物车
      */
-    @RequestMapping(value = "/clear", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.CLEAR_CART, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartClear() {
         logger.debug("清空了购物车");
@@ -146,7 +148,7 @@ public class ApiController {
     /**
      * 将购物车中的内容生成订单
      */
-    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.ORDER, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> order() {
         logger.debug("用户下单了");
@@ -158,7 +160,7 @@ public class ApiController {
     /**
      * 卖家删除商品
      */
-    @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.DELETE_GOODS, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> deleteGoods(@RequestParam("id") Integer goodsId) {
         logger.debug("删除了商品，ID : {}", goodsId);
@@ -170,7 +172,7 @@ public class ApiController {
     /**
      * 添加商品
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.ADD_GOODS, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> addGoods(@Valid GoodsForm form, BindingResult bindingResult,
                                         @RequestParam("goodsPictureFile") MultipartFile file,
@@ -255,14 +257,14 @@ public class ApiController {
     /**
      * 修改商品
      */
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    @RequestMapping(value = UrlDefine.API.MODIFY_GOODS, method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> modifyGoods(@Valid GoodsForm form, BindingResult bindingResult,
-                                        @RequestParam("goodsPictureFile") MultipartFile file,
-                                        @RequestParam("goodsId") Integer goodsId,
-                                        @RequestParam("goodsPictureType") Integer pictureType,
-                                        @RequestParam("goodsPictureLink") String link,
-                                        HttpServletRequest request) {
+                                           @RequestParam("goodsPictureFile") MultipartFile file,
+                                           @RequestParam("goodsId") Integer goodsId,
+                                           @RequestParam("goodsPictureType") Integer pictureType,
+                                           @RequestParam("goodsPictureLink") String link,
+                                           HttpServletRequest request) {
 
         JsonResult result = new JsonResult();
         if (bindingResult.hasErrors()) {

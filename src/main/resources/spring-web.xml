@@ -46,6 +46,7 @@
             <mvc:mapping path="/modify/**"/>
             <mvc:mapping path="/cart/**"/>
             <mvc:mapping path="/finance/**"/>
+            <mvc:exclude-mapping path="/api/login"/>
             <bean id="loginInterceptor" class="cn.gogotanc.work.web.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

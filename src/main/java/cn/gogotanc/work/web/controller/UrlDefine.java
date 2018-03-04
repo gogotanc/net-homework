@@ -23,4 +23,21 @@ class UrlDefine {
         static final String ADD = "/add";
         static final String MODIFY = "/modify";
     }
+
+    class API {
+        static final String ROOT = "/api";
+
+        static final String LOGIN = "/login";
+        static final String LOGOUT = "/logout";
+
+        static final String CART = "/cart";
+        static final String UPDATE_CART_ITEM_COUNT = "/updateCount";
+        static final String DELETE_CART_ITEM = "/delete";
+        static final String CLEAR_CART = "/clear";
+        static final String ORDER = "/order";
+
+        static final String DELETE_GOODS = "/deleteGoods";
+        static final String ADD_GOODS = "/add";
+        static final String MODIFY_GOODS = "/modify";
+    }
 }
