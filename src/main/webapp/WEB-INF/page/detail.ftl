@@ -85,7 +85,7 @@
                     <#else>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-de" disabled>已卖出</button>
+                                <button type="button" class="btn btn-default" disabled>已卖出</button>
                             </div>
                         </div>
                     </#if>
