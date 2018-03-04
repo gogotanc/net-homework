@@ -49,6 +49,9 @@ public class ApiController {
     @Autowired
     private GoodsService goodsService;
 
+    /**
+     * 用户登录请求处理
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> login(@RequestParam("username") String username,
@@ -71,19 +74,30 @@ public class ApiController {
         return result.toMap();
     }
 
+    /**
+     * 用户退出请求处理
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> logout(HttpServletRequest request) {
+
+        logger.debug("user logout");
 
         JsonResult result = new JsonResult();
         userService.logout(request);
         return result.toMap();
     }
 
+    /**
+     * 处理买家添加商品到购物车的请求
+     */
     @RequestMapping(value = "/cart", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cart(@RequestParam("goodsId") Integer goodsId,
                                     @RequestParam("count") Integer count) {
+
+        logger.debug("买家添加商品到购物车，商品 ID : {}, 商品数量 : {}", goodsId, count);
+
         CartItem item = new CartItem();
         item.setCount(count);
         item.setGoodsId(goodsId);
@@ -92,42 +106,62 @@ public class ApiController {
         return result.toMap();
     }
 
+    /**
+     * 用户更新购物车中商品的数量的请求
+     */
     @RequestMapping(value = "/updateCount", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId,
                                     @RequestParam("count") Integer count) {
+        logger.debug("更新购物车中某个商品的数量，购物车标识 ID : {}, 数量 : {}", itemId, count);
         cartService.updateCount(itemId, count);
         JsonResult result = new JsonResult();
         return result.toMap();
     }
 
+    /**
+     * 删除购物车中商品
+     */
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartUpdateCount(@RequestParam("itemId") Integer itemId) {
+        logger.debug("删除购物车中商品，购物车标识 ID : {}", itemId);
         cartService.deleteItem(itemId);
         JsonResult result = new JsonResult();
         return result.toMap();
     }
 
+    /**
+     * 清空购物车
+     */
     @RequestMapping(value = "/clear", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> cartClear() {
+        logger.debug("清空了购物车");
         cartService.clear();
         JsonResult result = new JsonResult();
         return result.toMap();
     }
 
+    /**
+     * 将购物车中的内容生成订单
+     */
     @RequestMapping(value = "/order", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> order() {
+        logger.debug("用户下单了");
         orderService.order();
         JsonResult result = new JsonResult();
         return result.toMap();
     }
 
+    /**
+     * 卖家删除商品
+     */
     @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> deleteGoods(@RequestParam("id") Integer goodsId) {
+        logger.debug("删除了商品，ID : {}", goodsId);
         goodsService.delete(goodsId);
         JsonResult result = new JsonResult();
         return result.toMap();
@@ -144,7 +178,7 @@ public class ApiController {
                                         @RequestParam("goodsPictureLink") String link,
                                         HttpServletRequest request) {
 
-        System.out.println(form);
+        logger.debug(form.toString());
 
         JsonResult result = new JsonResult();
         if (bindingResult.hasErrors()) {
@@ -186,6 +220,7 @@ public class ApiController {
             File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
             try {
                 file.transferTo(serverFile);
+                logger.debug("上传了新的图片文件，文件名 : {}", fileName);
             } catch (IOException e) {
                 e.printStackTrace();
                 result.setStatusFail();
@@ -263,6 +298,7 @@ public class ApiController {
             File dir = new File(path);
             if (!dir.exists()) {
                 if (!dir.mkdirs()) {
+                    logger.debug("创建文件夹失败");
                     result.setStatusFail();
                     return result.toMap();
                 }

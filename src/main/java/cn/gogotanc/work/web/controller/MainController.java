@@ -31,7 +31,10 @@ public class MainController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/")
+    /**
+     * 网站首页
+     */
+    @RequestMapping(UrlDefine.Main.INDEX)
     public String index(Model model, @RequestParam(value = "tag", defaultValue = "1") Integer tag) {
         model.addAttribute("message", "hello");
 
@@ -45,10 +48,13 @@ public class MainController {
 
         model.addAttribute("tag", tag);
         model.addAttribute("goodsList", goodsList);
-        return "index";
+        return ViewDefine.Main.INDEX;
     }
 
-    @RequestMapping("/detail")
+    /**
+     * 商品详情页
+     */
+    @RequestMapping(UrlDefine.Main.DETAIL)
     public String detail(@RequestParam("id") Integer goodsId, Model model) {
         Goods goods = goodsService.find(goodsId);
         if (goods.getFlag() == Constant.GOODS_FLAG_SOLD) {
@@ -56,15 +62,21 @@ public class MainController {
             model.addAttribute("order", item);
         }
         model.addAttribute("goods", goods);
-        return "detail";
+        return ViewDefine.Main.DETAIL;
     }
 
-    @RequestMapping("/login")
+    /**
+     * 登录页面
+     */
+    @RequestMapping(UrlDefine.Main.LOGIN)
     public String login() {
-        return "login";
+        return ViewDefine.Main.LOGIN;
     }
 
-    @RequestMapping("/cart")
+    /**
+     * 购物车页面
+     */
+    @RequestMapping(UrlDefine.Buyer.CART)
     public String cart(Model model) {
         List<GoodsItem> list = cartService.getAllItem();
         int total = 0;
@@ -74,10 +86,13 @@ public class MainController {
         double doubleTotal = Converter.price2Double(total);
         model.addAttribute("cart", list);
         model.addAttribute("total", doubleTotal);
-        return "cart";
+        return ViewDefine.Main.CART;
     }
 
-    @RequestMapping("/finance")
+    /**
+     * 财务页面
+     */
+    @RequestMapping(UrlDefine.Buyer.FINANCE)
     public String finance(Model model) {
         List<FinanceItem> list = orderService.getAllItem();
         int total = 0;
@@ -87,15 +102,21 @@ public class MainController {
         double doubleTotal = Converter.price2Double(total);
         model.addAttribute("list", list);
         model.addAttribute("total", doubleTotal);
-        return "finance";
+        return ViewDefine.Main.FINANCE;
     }
 
-    @RequestMapping("/add")
+    /**
+     * 添加商品页面
+     */
+    @RequestMapping(UrlDefine.Seller.ADD)
     public String add() {
-        return "add";
+        return ViewDefine.Main.ADD;
     }
 
-    @RequestMapping("/modify")
+    /**
+     * 编辑商品页面
+     */
+    @RequestMapping(UrlDefine.Seller.MODIFY)
     public String modify(@RequestParam(value = "id", required = true) Integer goodsId,
                          Model model) {
 
@@ -104,10 +125,10 @@ public class MainController {
         // 判断是否可以修改
         if (null == goods) {
             model.addAttribute("message", "商品不存在。");
-            return "message";
+            return ViewDefine.Main.MESSAGE;
         }
 
         model.addAttribute("goods", goods);
-        return "modify";
+        return ViewDefine.Main.MODIFY;
     }
 }
