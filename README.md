@@ -1,3 +1,4 @@
-## Homework for NetEase
+## Homework for NetEase 
 
-A simple web project.
+在线演示地址 [DEMO](http://120.24.241.20/)
+
