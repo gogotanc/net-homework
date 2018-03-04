@@ -34,4 +34,9 @@ public class Constant {
     public static final String UPLOAD_FILE_PREFIX = "UFT-";
     public static final Integer PICTURE_TYPE_LINK = 1;
     public static final Integer PICTURE_TYPE_FILE = 2;
+
+    /**
+     * 图片文件大小限制
+     */
+    public static final int UPLOAD_FILE_SIZE_LIMIT = 1024 * 1024;
 }

@@ -197,9 +197,19 @@ public class ApiController {
         } else if (pictureType == 2 && null == file) {
             result.setStatusFail("图片文件不能为空");
             return result.toMap();
+        } else if (pictureType == 2 && file.getSize() > Constant.UPLOAD_FILE_SIZE_LIMIT) {
+            result.setStatusFail("文件大小超出了限制，限制为 1M");
+            return result.toMap();
         }
 
-        Goods goods = createNewGoods(form, link);
+        Goods goods = new Goods();
+        goods.setModifyTime(new Date());
+        goods.setRegisterTime(new Date());
+        goods.setPrice(form.getGoodsPrice());
+        goods.setSummary(form.getGoodsSummary());
+        goods.setContent(form.getGoodsDetail());
+        goods.setTitle(form.getGoodsName());
+        goods.setPicture(link);
         goods.setFlag(Constant.GOODS_FLAG_UNSOLD);
 
         // 如果是选择上传了图片文件
@@ -240,21 +250,6 @@ public class ApiController {
     }
 
     /**
-     * 由表单数据生成一个新的 Goods 对象
-     */
-    private Goods createNewGoods(GoodsForm form, String picture) {
-        Goods goods = new Goods();
-        goods.setModifyTime(new Date());
-        goods.setRegisterTime(new Date());
-        goods.setPrice(form.getGoodsPrice());
-        goods.setSummary(form.getGoodsSummary());
-        goods.setContent(form.getGoodsDetail());
-        goods.setTitle(form.getGoodsName());
-        goods.setPicture(picture);
-        return goods;
-    }
-
-    /**
      * 修改商品
      */
     @RequestMapping(value = UrlDefine.API.MODIFY_GOODS, method = RequestMethod.POST)
@@ -280,6 +275,9 @@ public class ApiController {
             return result.toMap();
         } else if (pictureType == 2 && null == file) {
             result.setStatusFail("图片文件不能为空");
+            return result.toMap();
+        } else if (pictureType == 2 && file.getSize() > Constant.UPLOAD_FILE_SIZE_LIMIT) {
+            result.setStatusFail("文件大小超出了限制，限制为 1M");
             return result.toMap();
         }
 

@@ -159,6 +159,12 @@ $(document).ready(function () {
     });
 
     $('#publishButton').click(function () {
+
+        // 检查文件大小和后缀
+        if (checkedVal === '2' && !checkFile()) {
+            return;
+        }
+
         if (validateFunc().form()) {
             var data = new FormData(document.getElementById("goodsAddForm"));
 
@@ -184,6 +190,27 @@ $(document).ready(function () {
             });
         }
     });
+
+    function checkFile() {
+        var allowSize = 1024 * 1024; // 1M
+        var f = document.getElementById("goodsPictureFile").files;
+        var size = f[0].size;
+        var name = f[0].name;
+        var suffix = name.substr(name.lastIndexOf('.'));
+        console.log(suffix);
+        if (size > allowSize) {
+            $('#messagePanel').text("图片文件大小超过了 1M");
+            $('#showMessage').modal('toggle');
+            return false;
+        }
+        if (suffix === ".jpg" || suffix === ".gif" || suffix === ".JPG" || suffix === ".GIF" || suffix === ".png" || suffix === ".PNG") {
+            return true;
+        } else {
+            $('#messagePanel').text("不支持的文件格式（仅支持 gif、jpg、png）");
+            $('#showMessage').modal('toggle');
+            return false;
+        }
+    }
 
     function validateFunc() {
 
