@@ -23,8 +23,6 @@
     <script src="/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
-    <!-- 导航栏脚本 -->
-    <script src="/js/nav.js"></script>
 </head>
 <body>
 
@@ -41,7 +39,7 @@
     <div class="row">
         <div class="col-md-offset-1 col-md-4">
             <a href="#" class="thumbnail">
-                <img class="detail-img" src="${goods.picture}" alt="...">
+                <img class="detail-img" src="${goods.pictureUrl}" alt="...">
             </a>
         </div>
         <div class="col-md-6">
@@ -243,5 +241,7 @@ $(document).ready(function () {
 </#if>
 });
 </script>
+<!-- 导航栏脚本 -->
+<script src="/js/nav.js"></script>
 </body>
 </html>

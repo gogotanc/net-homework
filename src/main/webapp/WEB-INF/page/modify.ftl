@@ -69,7 +69,7 @@
                         <div id="form-group-link" class="form-group">
                             <label for="goodsPictureLink" class="col-sm-2 control-label">图片链接</label>
                             <div class="col-sm-10">
-                                <input type="text" id="goodsPictureLink" name="goodsPictureLink" value="${goods.pictureName}" class="form-control">
+                                <input type="text" id="goodsPictureLink" name="goodsPictureLink" value="${goods.picture}" class="form-control">
                             </div>
                         </div>
                         <div id="form-group-file" class="form-group show-hidden">
@@ -256,5 +256,7 @@ $(document).ready(function () {
     }
 });
 </script>
+<!-- 导航栏脚本 -->
+<script src="/js/nav.js"></script>
 </body>
 </html>

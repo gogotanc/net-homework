@@ -46,5 +46,7 @@
     </div>
 </div>
 
+<!-- 导航栏脚本 -->
+<script src="/js/nav.js"></script>
 </body>
 </html>

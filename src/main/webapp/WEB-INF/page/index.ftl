@@ -41,7 +41,7 @@
                 <#list goodsList as item>
                 <li class="goods-list-item">
                     <div class="thumbnail">
-                        <img class="goods-img" src="${item.picture}" alt="...">
+                        <img class="goods-img" src="${item.pictureUrl}" alt="...">
                         <div class="caption">
                             <p>${item.title}</p>
                             <p>￥ <strong style="color: red;">${item.realPrice?string("0.00")}</strong></p>

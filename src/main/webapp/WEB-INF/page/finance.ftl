@@ -23,8 +23,6 @@
     <script src="/js/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
-    <!-- 导航栏脚本 -->
-    <script src="/js/nav.js"></script>
 </head>
 <body>
 
@@ -56,7 +54,7 @@
                     <tr>
                         <td>
                             <figure class="img-rounded">
-                                <img class="finance-img" src="${item.picture}">
+                                <img class="finance-img" src="${item.pictureUrl}">
                             </figure>
                         </td>
                         <td>${item.title}</td>
@@ -71,5 +69,7 @@
         </div>
     </div>
 </div>
+<!-- 导航栏脚本 -->
+<script src="/js/nav.js"></script>
 </body>
 </html>

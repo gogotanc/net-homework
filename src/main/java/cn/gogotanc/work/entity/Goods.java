@@ -54,13 +54,13 @@ public class Goods {
     }
 
     public String getPicture() {
-        if (picture.startsWith(Constant.UPLOAD_FILE_PREFIX)) {
-            return "/upload/" + picture;
-        }
         return picture;
     }
 
-    public String getPictureName() {
+    public String getPictureUrl() {
+        if (picture.startsWith(Constant.UPLOAD_FILE_PREFIX)) {
+            return "/upload/" + picture;
+        }
         return picture;
     }
 

@@ -1,5 +1,7 @@
 package cn.gogotanc.work.entity;
 
+import cn.gogotanc.work.utils.Constant;
+
 import java.util.Date;
 
 /**
@@ -55,6 +57,13 @@ public class FinanceItem {
     }
 
     public String getPicture() {
+        return picture;
+    }
+
+    public String getPictureUrl() {
+        if (picture.startsWith(Constant.UPLOAD_FILE_PREFIX)) {
+            return "/upload/" + picture;
+        }
         return picture;
     }
 
