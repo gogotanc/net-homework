@@ -3,7 +3,6 @@ package cn.gogotanc.work.web.controller;
 import cn.gogotanc.work.entity.FinanceItem;
 import cn.gogotanc.work.entity.Goods;
 import cn.gogotanc.work.entity.GoodsItem;
-import cn.gogotanc.work.entity.Order;
 import cn.gogotanc.work.service.CartService;
 import cn.gogotanc.work.service.GoodsService;
 import cn.gogotanc.work.service.OrderService;
@@ -94,5 +93,21 @@ public class MainController {
     @RequestMapping("/add")
     public String add() {
         return "add";
+    }
+
+    @RequestMapping("/modify")
+    public String modify(@RequestParam(value = "id", required = true) Integer goodsId,
+                         Model model) {
+
+        Goods goods = goodsService.find(goodsId);
+
+        // 判断是否可以修改
+        if (null == goods) {
+            model.addAttribute("message", "商品不存在。");
+            return "message";
+        }
+
+        model.addAttribute("goods", goods);
+        return "modify";
     }
 }

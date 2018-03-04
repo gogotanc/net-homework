@@ -26,14 +26,14 @@
     </select>
 
     <select id="findAllItem" resultType="FinanceItem">
-        SELECT G.title AS 'title', G.price AS 'price', O.count AS 'count',
+        SELECT G.title AS 'title', O.price AS 'price', O.count AS 'count',
         O.create_time AS 'createTime', G.picture AS 'picture'
         FROM order_tbl O
         LEFT JOIN goods_tbl G ON O.goods_id = G.id
     </select>
 
     <select id="findItemByGoodsId" resultType="FinanceItem">
-        SELECT G.title AS 'title', G.price AS 'price', O.count AS 'count',
+        SELECT G.title AS 'title', O.price AS 'price', O.count AS 'count',
         O.create_time AS 'createTime', G.picture AS 'picture'
         FROM order_tbl O
         LEFT JOIN goods_tbl G ON O.goods_id = G.id

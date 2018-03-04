@@ -60,6 +60,10 @@ public class Goods {
         return picture;
     }
 
+    public String getPictureName() {
+        return picture;
+    }
+
     public void setPicture(String picture) {
         this.picture = picture;
     }

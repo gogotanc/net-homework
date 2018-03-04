@@ -85,6 +85,7 @@
                     <#else>
                         <div class="row">
                             <div class="col-md-12">
+                                <button type="button" id="modifyButton" class="btn btn-success">修改</button>
                                 <button type="button" class="btn btn-default" disabled>已卖出</button>
                             </div>
                         </div>
@@ -216,7 +217,7 @@ $(document).ready(function () {
 <#-- 卖家登录时加载的脚本 -->
     $('#modifyButton').click(function () {
         var goodsId = data.goodsId;
-        window.location.href = ("/updateGoods?id=" + goodsId);
+        window.location.href = ("/modify?id=" + goodsId);
     });
 
     $('#deleteButton').click(function () {

@@ -164,6 +164,7 @@ public class ApiController {
         }
 
         Goods goods = createNewGoods(form, link);
+        goods.setFlag(Constant.GOODS_FLAG_UNSOLD);
 
         // 如果是选择上传了图片文件
         if (pictureType.equals(Constant.PICTURE_TYPE_FILE)) {
@@ -202,11 +203,10 @@ public class ApiController {
     }
 
     /**
-     * 生成一个 Goods 对象
+     * 由表单数据生成一个新的 Goods 对象
      */
     private Goods createNewGoods(GoodsForm form, String picture) {
         Goods goods = new Goods();
-        goods.setFlag(0);
         goods.setModifyTime(new Date());
         goods.setRegisterTime(new Date());
         goods.setPrice(form.getGoodsPrice());
@@ -215,5 +215,78 @@ public class ApiController {
         goods.setTitle(form.getGoodsName());
         goods.setPicture(picture);
         return goods;
+    }
+
+    /**
+     * 修改商品
+     */
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> modifyGoods(@Valid GoodsForm form, BindingResult bindingResult,
+                                        @RequestParam("goodsPictureFile") MultipartFile file,
+                                        @RequestParam("goodsId") Integer goodsId,
+                                        @RequestParam("goodsPictureType") Integer pictureType,
+                                        @RequestParam("goodsPictureLink") String link,
+                                        HttpServletRequest request) {
+
+        JsonResult result = new JsonResult();
+        if (bindingResult.hasErrors()) {
+            result.setStatusFail(bindingResult.getAllErrors().get(0).getDefaultMessage());
+            return result.toMap();
+        }
+
+        if (null == pictureType) {
+            result.setStatusFail("图片类型不能为空");
+            return result.toMap();
+        } else if (pictureType == 1 && null == link) {
+            result.setStatusFail("图片链接不能为空");
+            return result.toMap();
+        } else if (pictureType == 2 && null == file) {
+            result.setStatusFail("图片文件不能为空");
+            return result.toMap();
+        }
+
+        Goods goods = goodsService.find(goodsId);
+        goods.setTitle(form.getGoodsName());
+        goods.setSummary(form.getGoodsSummary());
+        goods.setContent(form.getGoodsDetail());
+        goods.setPrice(form.getGoodsPrice());
+        goods.setModifyTime(new Date());
+        goods.setPicture(link);
+
+        // 如果是选择上传了图片文件
+        if (pictureType.equals(Constant.PICTURE_TYPE_FILE)) {
+
+            // /Users/tanc/project/neeet/src/main/webapp/
+            String path = request.getServletContext().getRealPath("/") + "upload" + File.separator;
+
+            File dir = new File(path);
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    result.setStatusFail();
+                    return result.toMap();
+                }
+            }
+            // 写文件到服务器
+            String fileOriginName = file.getOriginalFilename();
+            String suffix = fileOriginName.substring(fileOriginName.lastIndexOf("."), fileOriginName.length());
+            String fileName = Constant.UPLOAD_FILE_PREFIX + Encoder.getUUID() + suffix;
+            File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
+            try {
+                file.transferTo(serverFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                result.setStatusFail();
+                return result.toMap();
+            }
+
+            goods.setPicture(fileName);
+        }
+
+        // add goods to database
+        goodsService.update(goods);
+
+        result.setStatusOK(goods.getId() + "");
+        return result.toMap();
     }
 }
